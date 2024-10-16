@@ -1,0 +1,82 @@
+h1{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.gallery{
+    --_gap: 0.5rem;
+    --_offset:10%;
+    --_offset-1: calc(var(--_offset)*1);
+    --_offset-2: calc(var(--_offset)*2);
+    --_offset-3: calc(var(--_offset)*3);
+    --_offset-7: calc(var(--_offset)*7);
+    --_offset-8: calc(var(--_offset)*8);
+    --_offset-9: calc(var(--_offset)*9);
+
+    width: calc(100%-4rem);
+    max-width: 800px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 var(--_gap);
+    
+}
+
+.gallery > div{
+    position: relative;
+    aspect-ratio: 1;
+    transition: scale 500ms ease-in-out, filter 500ms ease-in-out, clip-path 500ms ease-in-out 500ms;
+    clip-path: polygon(var(--_clip-path));
+
+}
+
+
+.gallery img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery > div:nth-child(n+4){
+    margin-top: calc(var(--_offset-3) * -1 + var(--_gap));
+}
+
+
+/* definir las propiedades personalizadas de clip-path */
+.gallery > div:nth-child(1){
+    --_clip-path: 0 0, 100% 0, 100% var(var(--_offset-9), 0 100%);
+}
+.gallery > div:nth-child(2){
+    --_clip-path: 0 0, 100% 0, 100% var(var(--_offset-8), 0 var(--_offset-9));
+}
+.gallery > div:nth-child(3){
+    --_clip-path: 0 0, 100% 0, 100% var(var(--_offset-7), 0 var(--_offset-8))
+}
+
+
+.gallery > div:nth-child(4){
+    --_clip-path: 0 var(--_offset-3), 100% var(--_offset2), 100% var(--_offset-8), 0 var(--_offset-7);
+}
+.gallery > div:nth-child(5){
+    --_clip-path: 0 var(--_offset-2), 100% var(--_offset-1), 100% var(var(--_offset-9), 0 var(--_offset-8));
+}
+.gallery > div:nth-child(6){
+    --_clip-path: 0 var(--offset-1), 100% 0%, 100% 100%, 0 var(--_offset-9);
+}
+
+
+.gallery > div:nth-child(7){
+    --_clip-path: 0 0%, 100% var(--_offset-1), 100% 100%, 0 100%;
+}
+.gallery > div:nth-child(8){
+    --_clip-path: 0 var(--_offset-1), 100% var(--_offset-2), 100% 100%, 0 100%;
+}
+.gallery > div:nth-child(9){
+    --_clip-path: 0 var(--_offset-2), 100% var(--_offset-3), 100% 100%, 0 100%;
+}
+
+
+@keyframes zIndexHack{
+    0%, 100% {z-index: 100;}
+}
