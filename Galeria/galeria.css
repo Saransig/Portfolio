@@ -1,3 +1,4 @@
+/* Reset y estructura base */
 * {
     margin: 0;
     padding: 0;
@@ -5,57 +6,90 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #E0E0E0, #A0522D);
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to bottom, #d3e4cd, #99a799); /* Verde suave */
+    color: #2e4a2e;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-
+/* Contenedor principal de la galería */
 .gallery-container {
     text-align: center;
-    max-width: 1000px;
+    max-width: 40%;
     margin: 0 auto;
+    padding: 20px;
+    background-color: #e8f0e1; /* Fondo suave para la galería */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Encabezado */
 h1 {
-    font-size: 4em;
+    font-size: 2.5em;
     margin-bottom: 20px;
-    color: #f5f5dc;
-    text-align: center;
-    text-shadow: 0 0 20px #35a177;
+    color: #355e3b; /* Verde oscuro, evocando la naturaleza */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Georgia', serif;
+    text-align: center; /* Centrado horizontal */
 }
 
-
-
+/* Estilo para la galería */
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    gap: 20px;
+    margin-top: 20px;
 }
 
+/* Estilo para cada elemento de la galería */
 .gallery-item {
-    flex: 0 0 30%;
-    margin-bottom: 20px;
-    padding: 10px;
-    
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f1f7f0; /* Fondo claro para un efecto de borde */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-item img {
     width: 100%;
-    height: 350px;
+    height: 100%;
     display: block;
     object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
 }
 
+/* Efecto hover para las imágenes */
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
 
+.gallery-item:hover img {
+    transform: scale(1.05);
+    opacity: 0.95;
+}
+
+/* Adaptación para pantallas medianas */
 @media screen and (max-width: 768px) {
-    .gallery-item {
-        flex: 0 0 48%;
+    h1 {
+        font-size: 2em;
+    }
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
     }
 }
 
+/* Adaptación para pantallas pequeñas */
 @media screen and (max-width: 480px) {
-    .gallery-item {
-        flex: 0 0 100%;
+    h1 {
+        font-size: 1.8em;
+    }
+    .gallery {
+        grid-template-columns: 1fr; /* Una columna */
     }
 }
