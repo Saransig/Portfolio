@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Películas y Series</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Películas y Series Pendientes</h1>
+
+        <!-- entrada de texto para añadir pelicula o serie -->
+         <input type="text" id="movieInput" placeholder="Añadir pelicula o serie...">
+         <button onclick="addMovie()">Añadir</button>
+
+         <!-- listado de peliculas -->
+          <h2>Películas o Series Pendientes</h2>
+          <ul id="movieList"></ul>
+
+          <!-- botón para mostrar aleatoriamente -->
+           <button onclick="randomMovie()">Elegir</button>
+
+
+           <!-- mostrar la pelicula seleccionada -->
+            <h2>¡Para hoy tenemos...!</h2>
+            <p id="selectedMovie"></p>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
