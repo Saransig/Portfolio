@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Películas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <button onclick="location.href='index.html'">🏠</button>
+        <button onclick="location.href='series.html'">Ir Series</button>
+        <h1>Lista de Películas</h1>
+
+        <!-- entrada de texto para añadir pelicula -->
+         <input type="text" id="movieInput" placeholder="Añadir pelicula...">
+         <button onclick="addMovie()">Añadir</button>
+
+         <!-- listado de peliculas -->
+          <h2>Películas o Series Pendientes</h2>
+          <ul id="movieList"></ul>
+
+          <!-- botón para mostrar aleatoriamente -->
+           <button onclick="randomMovie()">Elegir</button>
+
+
+           <!-- mostrar la pelicula seleccionada -->
+            <h2>¡Para hoy tenemos...!</h2>
+            <p id="selectedMovie"></p>
+            
+            
+            <!-- lista de peliculas ya vistas -->
+            <h2>Peliculas o Series vistas</h2>
+            <ul id="watchedList"></ul>
+
+            <!-- eliminar todos los datos de películas y series-->
+             <div class="deleteAll">
+                <button onclick="clearAllData()">Eliminar</button>
+             </div>
+    </div>
+    <script src="movies.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Series</title>
+</head>
+<body>
+    <div class="container">
+        <button onclick="location.href='index.html'">🏠</button>
+        <button onclick="location.href='movies.html'">Ir Películas</button>
+        <h1>Lista de Series</h1>
+
+        <!-- entrada de textopara añadir serie -->
+        <input type="text" id="tvSeriesInput" placeholder="Añadir serie...">
+        <button onclick="addTvSerie()">Añadir Serie</button>
+
+        <!-- listado de series -->
+        <h2>Series Pendientes</h2>
+        <ul id="tvSerieList"></ul>
+
+        <!-- boton para mostrar serie de forma aleatoria -->
+        <button onclick="randomTvSerie()">Elegir Serie</button>
+
+        <!-- mostrar la serie seleccionada -->
+        <h2>¡Para hoy tenemos...!</h2>
+        <p id="selectedTvSerie"></p>
+
+        <!-- listado de series ya vistas -->
+        <h2>Series Vistas</h2>
+        <ul id="watchedTvSerieList"></ul>
+
+    
+    </div>
+    <script src="series.js"></script>
+</body>
+</html>
