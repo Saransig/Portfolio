@@ -39,7 +39,20 @@
     transition: all 0.3s ease;
 }
 
+.home{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0;
+}
 
+
+.icon-svg{
+    width: 50px;
+    height: 50px;
+}
 
 
 #containerIndex button:hover,
@@ -197,14 +210,77 @@ ul li:hover{
 }
 
 
+
+
+
+/* estilo series */
+
+#containerTvSeries{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+#containerTvSeries h1{
+    font-size: 2.2rem;
+    font-size: 600;
+}
+
+
+#containerTvSeries button{
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    
+}
+
+.containerTvSeries button:first-of-type{
+    position: relative;
+    top: 15px;
+    left: 15px;
+    background: #4e54c8;
+    color: #fff;
+}
+
+/* película seleccionada */
+#selectedTvSerie{
+    font-size: 1.3rem;
+    color: #f5f5f5;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+
+
+
 @media(max-width:768px){
-    .containerMovies h1{
+    #containerMovies h1{
         font-size: 1.8rem;
     }
 
-    .containerMovies button, .deleteAll button{
+    #containerTvSeries h1{
+        font-size: 1.8rem;
+    }
+
+    #containerMovies button, .deleteAll button{
         font-size: 1rem;
         padding: 10px 15px;
+    }
+
+    #containerTvSeries button{
+        font-size: 1rem;
+        padding:10px 15px;
     }
 
     input[type="text"]{

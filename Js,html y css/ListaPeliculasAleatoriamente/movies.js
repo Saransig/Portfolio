@@ -9,7 +9,7 @@ let watchedMovies = JSON.parse(localStorage.getItem("watchedMovies")) || [];
 // variables de paginación
 let currentPage = 1;
 let currentPageWatched = 1;
-const itemsPerPage = 5;
+const itemsPerPage = 4;
 
 
 
@@ -89,11 +89,17 @@ function displayMovies(){
         removeMovie.classList.add("removeMovie-btn");
         removeMovie.addEventListener("click",()=>{
             //Confirmación de eliminar
-            const confirmation = confirm(`Estás seguro de eliminar ${movie}?`);
+            const confirmation = confirm(`¿Estás seguro de eliminar ${movie}?`);
             if(confirmation){
                 //eliminar película
                 movies.splice(start+index,1);
                 updateLocalStorage();
+                displayMovies();
+
+                //Verificar si la página actual está vacía y retroceder si es necesario
+                if(movies.length % itemsPerPage === 0 && currentPage > 1){
+                    currentPage--;
+                }
                 displayMovies();
             }
         });

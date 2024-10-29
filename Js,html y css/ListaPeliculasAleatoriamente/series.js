@@ -7,6 +7,12 @@ let watchedTvSeries = JSON.parse(localStorage.getItem("watchedTvSeries")) || [];
 
 
 
+//variables paginación
+let currentPage=1;
+let currentPageWatched = 1;
+const itemsPerPage = 4;
+
+
 //funcion añadir serie
 function addTvSerie(){
     const tvSeriesInput = document.getElementById("tvSeriesInput");
@@ -29,15 +35,33 @@ function addTvSerie(){
     //Verifico si la serie ya existe
     const tvSerieExists = tvSeries.find((tvSerie)=>tvSerie.toLowerCase()=== tvSerieName.toLowerCase());
 
+    //Verificar si la serie ya ha sido vista
+    const tvSerieExistsWatched = watchedTvSeries.find((tvSerie)=>tvSerie.toLowerCase() === tvSerieName.toLowerCase());
+
+
     if(tvSerieExists){
         alert(`${tvSerieExists} ya está en la lista.`);
         tvSeriesInput.value="";
-    }else{
-        tvSeries.push(tvSerieName);
-        tvSeriesInput.value="";
-        updateLocalStorage();
-        displayTvSerie();
+        return;
     }
+    // else{
+    //     tvSeries.push(tvSerieName);
+    //     tvSeriesInput.value="";
+    //     updateLocalStorage();
+    //     displayTvSerie();
+    // }
+
+    if(tvSerieExistsWatched){
+        alert(`${tvSerieExistsWatched} ya ha sido vista`);
+        tvSeriesInput.value="";
+        return;
+    }
+
+    //Si no esta en ninguna lista, añadir a pendientes
+    tvSeries.push(tvSerieName);
+    tvSeriesInput.value="";
+    updateLocalStorage();
+    displayTvSerie();
 }
 
 //funcion para ver lista series
@@ -45,7 +69,15 @@ function displayTvSerie(){
     const tvSerieList= document.getElementById("tvSerieList");
     tvSerieList.innerHTML= "";
 
-    tvSeries.forEach((tvSerie, index)=>{
+
+    const start = (currentPage-1)*itemsPerPage;
+    const end = start + itemsPerPage;
+
+    //obtener las series de la página actual
+    const tvSeriesToDisplay = tvSeries.slice(start,end);
+
+
+    tvSeriesToDisplay.forEach((tvSerie, index)=>{
         const listItemTvSerie = document.createElement("li");
         listItemTvSerie.textContent = tvSerie;
 
@@ -53,14 +85,44 @@ function displayTvSerie(){
         removeTvSerie.textContent = "🗑️";
         removeTvSerie.classList.add("removeTvSerie-btn");
         removeTvSerie.addEventListener("click",()=>{
-            tvSeries.splice(index,1);
-            updateLocalStorage();
-            displayTvSerie();
+            //Confirmacion al eliminar elemento
+            const confirmation = confirm(`¿Estás seguro de eliminar ${tvSerie}?`);
+            if(confirmation){
+                //eliminar elemento serie
+                tvSeries.splice(start+index,1);
+                updateLocalStorage();
+                displayTvSerie();
+
+                if(tvSeries.length % itemsPerPage === 0 && currentPage > 1){
+                    currentPage--;
+                }
+
+                displayTvSerie();
+            }
+
         });
 
         listItemTvSerie.appendChild(removeTvSerie);
         tvSerieList.appendChild(listItemTvSerie);
     });
+
+    upgradePagination();
+}
+
+
+//funciona para actualizar controles de paginacion
+function upgradePagination(){
+    const totalPages = Math.ceil(tvSeries.length/ itemsPerPage);
+    document.getElementById("currentPage").textContent = currentPage;
+
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled = currentPage === totalPages || totalPages === 0;
+
+}
+
+function changePage(direction){
+    currentPage += direction;
+    displayTvSerie();
 }
 
 
@@ -69,13 +131,37 @@ function displayWatchedTvSeries(){
     const watchedTvSerieList= document.getElementById("watchedTvSerieList");
     watchedTvSerieList.innerHTML = "";
 
-    watchedTvSeries.forEach((watchedTvSerie)=>{
+    const start = (currentPageWatched - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    const watchedTvSeriesToDisplay = watchedTvSeries.slice(start, end);
+
+
+    watchedTvSeriesToDisplay.forEach((watchedTvSerie)=>{
         const listItem = document.createElement("li");
         listItem.textContent = watchedTvSerie;
         watchedTvSerieList.appendChild(listItem);
     });
+
+    upgradePaginationWatched();
 }
 
+
+function upgradePaginationWatched(){
+    const totalPages=Math.ceil(watchedTvSeries.length / itemsPerPage);
+    document.getElementById("currentPageWatched").textContent = currentPageWatched;
+
+    //habilitar o deshabilitar botones de paginación
+    document.getElementById("prevPageWatched").disabled = currentPageWatched === 1;
+    document.getElementById("nextPageWatched").disabled = currentPageWatched === totalPages|| totalPages === 0;
+
+}
+
+
+function changePageWatched(direction){
+    currentPageWatched += direction;
+    displayWatchedTvSeries();
+}
 
 
 //función elegir serie de forma aleatoria
@@ -106,7 +192,7 @@ function randomTvSerie(){
 
 
 
-// funcion para actualizar el local storage con el array de peliculas "movies"
+// funcion para actualizar el local storage con el array de series
 function updateLocalStorage(){   
     localStorage.setItem("tvSeries", JSON.stringify(tvSeries));
     localStorage.setItem("watchedTvSeries", JSON.stringify(watchedTvSeries));
