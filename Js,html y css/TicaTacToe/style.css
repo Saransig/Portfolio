@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+}
+  
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 20px auto;
+    width: 320px;
+}
+  
+.cell {
+    background-color: #f2f2f2;
+    border: 1px solid #000;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+  
+.cell:hover {
+    background-color: #e0e0e0;
+}
+  
+#status {
+    font-size: 18px;
+    margin-top: 20px;
+}
+  
+
+/* resaltar las celdas ganadoras */
+.highlight {
+    background-color: #FFD700;
+    animation: winHighlight 1s ease-in-out infinite alternate;
+}
+  
+
+@keyframes winHighlight {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
