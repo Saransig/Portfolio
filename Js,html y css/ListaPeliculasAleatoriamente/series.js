@@ -6,20 +6,37 @@ let tvSeries = JSON.parse(localStorage.getItem("tvSeries")) || [];
 let watchedTvSeries = JSON.parse(localStorage.getItem("watchedTvSeries")) || [];
 
 
-//TVSeries
 
 //funcion añadir serie
 function addTvSerie(){
     const tvSeriesInput = document.getElementById("tvSeriesInput");
     const tvSerieName = tvSeriesInput.value.trim();
 
-    if(tvSerieName){
+    // if(tvSerieName){
+    //     tvSeries.push(tvSerieName);
+    //     tvSeriesInput.value="";
+    //     updateLocalStorage();
+    //     displayTvSerie();
+    // }else{
+    //     alert("No se ha ingresado el nombre de la serie.")
+    // }
+
+    if(!tvSerieName){
+        alert("No se ha ingresado el nombre de la serie.");
+        return;
+    }
+
+    //Verifico si la serie ya existe
+    const tvSerieExists = tvSeries.find((tvSerie)=>tvSerie.toLowerCase()=== tvSerieName.toLowerCase());
+
+    if(tvSerieExists){
+        alert(`${tvSerieExists} ya está en la lista.`);
+        tvSeriesInput.value="";
+    }else{
         tvSeries.push(tvSerieName);
         tvSeriesInput.value="";
         updateLocalStorage();
         displayTvSerie();
-    }else{
-        alert("No se ha ingresado el nombre de la serie.")
     }
 }
 
@@ -33,7 +50,7 @@ function displayTvSerie(){
         listItemTvSerie.textContent = tvSerie;
 
         const removeTvSerie = document.createElement("button");
-        removeTvSerie.textContent = "Eliminar";
+        removeTvSerie.textContent = "🗑️";
         removeTvSerie.classList.add("removeTvSerie-btn");
         removeTvSerie.addEventListener("click",()=>{
             tvSeries.splice(index,1);

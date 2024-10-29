@@ -1,0 +1,214 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Estilo Index */
+#containerIndex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg,#4e54c8, #8f94fb);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+
+#containerIndex h1{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-size: 600;
+}
+
+
+#containerIndex button{
+    background-color: #ffffff;
+    color: #4e54c8;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+
+
+
+#containerIndex button:hover,
+#containerIndex button:focus,
+#containerIndex button:active{
+    background-color: #8f94fb;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+
+/* Diseño adaptativo pantalla inicio*/
+@media(max-width:768px){
+    #containerIndex h1{
+        font-size: 2rem;
+    }
+
+    #containerIndex{
+        font-size: 1rem;
+        padding: 10px 16px;
+    }
+
+    
+}
+
+/* Diseño pagina películas */
+#containerMovies{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+#containerMovies h1{
+    font-size: 2.2rem;
+    font-size: 600;
+}
+
+
+#containerMovies button{
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    
+}
+
+.containerMovies button:first-of-type{
+    position: relative;
+    top: 15px;
+    left: 15px;
+    background: #4e54c8;
+    color: #fff;
+}
+
+/* estilo entrada de texto */
+input[type="text"]{
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    font-size: 1rem;
+    border: 2px solid #8f94fb;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+
+input[type="text"]:focus{
+    border-color: #ffffff;
+}
+
+.container h2{
+    margin: 20px 0 10px;
+    font-size: 1.5rem;
+
+}
+
+/* lista de peliculas */
+ul{
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: 10px 0 20px;
+}
+
+
+ul li{
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s;
+}
+
+ul li:hover{
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* estilo boton papelera tanto para películas como series */
+.removeMovie-btn, .removeTvSerie-btn{
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    margin-left: 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    min-width: 50px;
+
+}
+
+/* estilo boton papelera tanto para películas como series */
+.removeMovie-btn:hover, .removeTvSerie-btn:hover{
+    background-color: #1E2235;
+}
+
+
+/* película seleccionada */
+#selectedMovie{
+    font-size: 1.3rem;
+    color: #f5f5f5;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+
+/* boton para eliminar todos los datos */
+.deleteAll button{
+    background-color: #ff6b6b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3 ease;
+}
+
+.deleteAll button:hover{
+    background-color: #ff4d4d;
+}
+
+
+@media(max-width:768px){
+    .containerMovies h1{
+        font-size: 1.8rem;
+    }
+
+    .containerMovies button, .deleteAll button{
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+
+    input[type="text"]{
+        width: 90%;
+        font-size: 0.9rem;
+    }
+}
