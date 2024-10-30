@@ -1,49 +1,150 @@
-*{
+body {
+    background-color: #4B0082; /* Morado oscuro */
+    color: #FFFFFF; /* Texto blanco para contraste */
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-body {
+h1 {
+    color: #39FF14; /* Color neón */
     text-align: center;
+    margin-top: 20px;
+    text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14; /* Efecto neón brillante */
 }
-  
+
+.container {
+    margin-top: 30px;
+}
+
+#score {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#score p {
+    font-size: 1.5rem; /* Aumentar tamaño de texto */
+    margin: 0;
+}
+
+.score-players {
+    font-size: 2rem; /* Aumentar tamaño de puntuaciones */
+}
+
 #board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
-    margin: 20px auto;
-    width: 320px;
-}
-  
-.cell {
-    background-color: #f2f2f2;
-    border: 1px solid #000;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
+    gap: 10px;
     justify-content: center;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #8A2BE2; /* Color de las celdas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #FFFFFF; /* Texto blanco */
     cursor: pointer;
+    border: 2px solid #FFFFFF; /* Bordes blancos */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: background-color 0.3s, transform 0.3s;
 }
-  
+
 .cell:hover {
-    background-color: #e0e0e0;
+    background-color: #7B68EE; /* Color al pasar el mouse */
+    transform: scale(1.05);
 }
-  
+
+.winner-cell {
+    background-color: #32CD32; /* Verde para la celda ganadora */
+    pointer-events: none;
+}
+
 #status {
-    font-size: 18px;
-    margin-top: 20px;
+    text-align: center;
+    font-size: 1.5rem; /* Aumentar tamaño de texto */
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+    border-radius: 10px; /* Bordes redondeados */
 }
-  
 
-/* resaltar las celdas ganadoras */
-.highlight {
-    background-color: #FFD700;
-    animation: winHighlight 1s ease-in-out infinite alternate;
+#shift-indicator {
+    text-align: center;
+    margin: 20px 0;
 }
-  
 
-@keyframes winHighlight {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
+#shift-indicator span {
+    font-size: 2rem;
+    color: #39FF14; /* Color para el símbolo del turno */
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#shift-indicator span:hover {
+    transform: scale(1.2);
+}
+
+#game-history {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px auto; /* Centramos el historial */
+    max-width: 300px; /* Ancho máximo para el historial */
+    width: auto; /* Ajustar al contenido */
+}
+
+#game-history h3 {
+    color: #ffffff; /* Color neón */
+    text-align: center; /* Centrar el título del historial */
+}
+
+#game-history ul {
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+}
+
+#game-history ul li {
+    color: #FFFFFF; /* Texto blanco */
+}
+
+button {
+    background-color: #FF6347; /* Color de botón */
+    color: #FFFFFF; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 20px auto; /* Centrar botón */
+}
+
+button:hover {
+    background-color: #FF4500; /* Color al pasar el mouse */
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    #board {
+        max-width: 80%; /* Asegura que el tablero no se extienda demasiado */
+        gap: 8px; /* Reduce el espacio entre celdas */
+    }
+
+    #game-history {
+        margin-top: 20px; /* Separación desde el contenido principal */
+        width: auto; /* Ajustar al contenido, no ocupar todo el ancho */
+        max-width: 90%; /* Asegura que el historial no se superponga */
+    }
+
+    #score {
+        font-size: 1.2rem; /* Ajustar tamaño de puntuaciones en pantallas pequeñas */
+    }
 }
