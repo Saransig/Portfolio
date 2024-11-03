@@ -9,7 +9,8 @@
   <body>
     <div class="container" id="containerTvSeries">
       <button class="home" onclick="location.href='index.html'">
-        <svg class="icon-svg"
+        <svg
+          class="icon-svg"
           fill="#000000"
           version="1.1"
           id="Capa_1"
@@ -53,6 +54,11 @@
         <button id="nextPage" onclick="changePage(1)">Siguiente</button>
       </div>
 
+      <!-- boton eliminar peliculas pendientes -->
+      <button onclick="clearPendingTvSeries()" style="background-color: #ff6b6b ; color:#ffffff">
+        Eliminar Series Pendientes
+      </button>
+
       <!-- boton para mostrar serie de forma aleatoria -->
       <button onclick="randomTvSerie()">Elegir Serie</button>
 
@@ -73,6 +79,10 @@
         <button id="nextPageWatched" onclick="changePageWatched(1)">
           Siguiente
         </button>
+      </div>
+      <!-- eliminar todos los datos de películas y series-->
+      <div class="deleteAll">
+        <button onclick="clearAllData()">Eliminar Todo los Datos</button>
       </div>
     </div>
     <script src="series.js"></script>

@@ -126,6 +126,20 @@ function changePage(direction){
 }
 
 
+//función para borrar todos los elementos de peliculas pendientes
+function clearPendingTvSeries(){
+    //antes de borrar pedimos confirmación
+    const confimDeletePendingTvSeries = confirm("¿Estás seguro de eliminar tadas las series de esta lista?");
+
+    if(confimDeletePendingTvSeries){
+        tvSeries = [];
+        updateLocalStorage();
+        displayTvSerie();
+        alert("Todas las series de esta lista han sido eliminadas")
+    }
+}
+
+
 //función series vistas
 function displayWatchedTvSeries(){
     const watchedTvSerieList= document.getElementById("watchedTvSerieList");
@@ -190,7 +204,12 @@ function randomTvSerie(){
 }
 
 
-
+//eliminar todos los datos almacenados en localStorage
+function clearAllData(){
+    localStorage.clear();
+    alert("Todos los datos seran eliminados.")
+    location.reload();
+}
 
 // funcion para actualizar el local storage con el array de series
 function updateLocalStorage(){   

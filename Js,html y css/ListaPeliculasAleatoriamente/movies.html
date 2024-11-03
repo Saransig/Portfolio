@@ -9,7 +9,8 @@
   <body>
     <div class="container" id="containerMovies">
       <button class="home" onclick="location.href='index.html'">
-        <svg class="icon-svg"
+        <svg
+          class="icon-svg"
           fill="#000000"
           version="1.1"
           id="Capa_1"
@@ -33,7 +34,9 @@
           />
         </svg>
       </button>
-      <button class="tvSeriesNav" onclick="location.href='series.html'">Ir Series</button>
+      <button class="tvSeriesNav" onclick="location.href='series.html'">
+        Ir Series
+      </button>
       <h1>Lista de Películas</h1>
 
       <!-- entrada de texto para añadir pelicula -->
@@ -51,6 +54,11 @@
         <button id="nextPage" onclick="changePage(1)">Siguiente</button>
       </div>
 
+      <!-- boton eliminar peliculas pendientes -->
+      <button onclick="clearPendingMovies()" style="background-color: #ff6b6b; color: #ffffff;">
+        Eliminar Peliculas Pendientes
+      </button>
+
       <!-- botón para mostrar aleatoriamente -->
       <button onclick="randomMovie()">Elegir</button>
 
@@ -64,14 +72,18 @@
 
       <!-- paginacion de lista de películas ya vistas-->
       <div class="paginationMovies">
-        <button id="prevPageWatched" onclick="changePageWatched(-1)">Anterior</button>
+        <button id="prevPageWatched" onclick="changePageWatched(-1)">
+          Anterior
+        </button>
         <span id="currentPageWatched">1</span>
-        <button id="nextPageWatched" onclick="changePageWatched(1)">Siguiente</button>
+        <button id="nextPageWatched" onclick="changePageWatched(1)">
+          Siguiente
+        </button>
       </div>
 
       <!-- eliminar todos los datos de películas y series-->
       <div class="deleteAll">
-        <button onclick="clearAllData()">Eliminar Datos</button>
+        <button onclick="clearAllData()">Eliminar Todo los Datos</button>
       </div>
     </div>
     <script src="movies.js"></script>

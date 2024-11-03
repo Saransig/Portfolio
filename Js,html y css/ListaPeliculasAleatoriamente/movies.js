@@ -132,6 +132,18 @@ function changePage(direction){
     displayMovies();
 }
 
+//función para borrar todos los elementos de peliculas pendientes
+function clearPendingMovies(){
+    //antes de borrar pedimos confirmación
+    const confimDeletePendingMovies = confirm("¿Estás seguro de eliminar tadas las películas de esta lista?");
+
+    if(confimDeletePendingMovies){
+        movies = [];
+        updateLocalStorage();
+        displayMovies();
+        alert("Todas las películas de esta lista han sido eliminadas")
+    }
+}
 
 // funcion para mostrar peliculas o series ya vistas
 function displayWatchedMovies(){

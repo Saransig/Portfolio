@@ -22,10 +22,59 @@ let gameActive = true;
 //Temporizador para borrar el historial despues de un tiempo
 let clearHistoryTimeout;
 
+//almacenar turnos de movimineto
+let currentMoves=[];
+
+
+
+//Función para que la IA haga un movimiento aleatorio
+function randomIA(){
+    if(!gameActive)return;      //si el juego ha terminado, no se hace nada
+
+    //con esto se obtiene los índices de las celdas vacías
+    let availableCells = boardStatus.map((cell, index) => (cell === '' ? index : null)).filter(index => index !== null);
+
+    if (availableCells.length === 0) return;        //no hay movimientos posbiles
+
+    let randomIndex = availableCells[Math.floor(Math.random()* availableCells.length)];
+    boardStatus[randomIndex] = currentPlayer;
+    cells[randomIndex].textContent = currentPlayer;
+    currentMoves.push(currentPlayer + randomIndex);
+
+    //verificar si ha ganado la IA
+    if(checkWin()){
+        statusText.textContent = `¡${currentPlayer} ha ganado! El juego se reiniciara...`;
+        updateHistoryGame();
+        gameActive = false;
+        disableCells();
+        setTimeout(resetGame, 5000);
+        return;
+    }
+
+
+
+    //verificar si hay empate
+    if(isTie()){
+        statusText.textContent = `¡Empate! El juego se reiniciará...`;
+        updateHistoryGame();
+        gameActive = false;
+        disableCells();
+        setTimeout(resetGame, 5000);
+        return;
+    }
+
+    //cambiar turno jugador
+    currentPlayer = 'X';
+    statusText.textContent = `${currentPlayer} es tu turno`;
+    updateShiftTurn();
+
+}
+
 
 //funcion para actualizar el historial 
 function updateHistoryGame(winner){
     const result = winner ? `Ganador: ${winner}` : 'Empate';
+    // const moves = currentMoves.join(',');
     gameHistory.push(result);
 
     //Actualizar localStorage
@@ -107,13 +156,16 @@ function updateShiftTurn(){
 
 showHistoryGame();
 
+
 //Manipular el clic de una celda
 function cellClick(index){
     //Evita sobrescribir o segir si ya hay ganador
-    if(boardStatus[index] || !gameActive) return;
+    if(boardStatus[index] || !gameActive || currentPlayer !== 'X') return;
 
     boardStatus[index] = currentPlayer;
     cells[index].textContent = currentPlayer;
+    //Almacenar movimento
+    currentMoves.push(currentPlayer + index);
 
     //Verificar si hay ganador
     if(checkWin()){
@@ -144,10 +196,17 @@ function cellClick(index){
     }
 
     //Cambia el jugador
-    currentPlayer = currentPlayer === 'X'?'O':'X';
+    // currentPlayer = currentPlayer === 'X'?'O':'X';
+
+    //Cambiar turno IA 
+    currentPlayer = 'O';
+
     statusText.textContent = `${currentPlayer} es tu turno`;
 
     updateShiftTurn();
+
+    //Llamar a la IA para que realice movimeinto
+    setTimeout(randomIA, 400);
 }
 
 //funcion empate
@@ -206,6 +265,7 @@ function resetGame(){
     //Reinicia el estado del tablero
     boardStatus = Array(9).fill('');
     gameActive = true;
+    currentMoves = [];
 
     // cells.forEach(cell => (cell.textContent = ''));
     
