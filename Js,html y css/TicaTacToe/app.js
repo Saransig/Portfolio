@@ -44,7 +44,7 @@ function randomIA(){
     //verificar si ha ganado la IA
     if(checkWin()){
         statusText.textContent = `¡${currentPlayer} ha ganado! El juego se reiniciara...`;
-        updateHistoryGame();
+        updateHistoryGame(currentPlayer);
         gameActive = false;
         disableCells();
         setTimeout(resetGame, 5000);
