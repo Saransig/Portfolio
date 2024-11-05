@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe1P</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <nav>
+        <button class="home" onclick="location.href='index.html'">Home</button>
+    </nav>
+    <div class="container">
+
+        <h1>Juego Tic-Tac-Toe</h1>
+
+        <div id="score">
+            <p>Puntuaciones:</p>
+            <div class="score-players">
+                <span>Jugador X: <span id="score-x">0</span></span>
+                <span>Jugador O: <span id="score-o">0</span></span>
+            </div>
+        </div>
+
+        <div id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <p id="status">Jugador X comienza</p>
+        <div id="shift-indicator">
+            <p>Turno actual</p>
+            <span id="symbol-turn">X</span>
+        </div>
+
+        <div id="game-history">
+            <h3>Historial de partidas</h3>
+            <ul id="history-cell"></ul>
+            <button onclick="resetHistoryGame()">Reiniciar historial</button>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+    
+</body>
+</html>

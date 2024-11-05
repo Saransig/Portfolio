@@ -27,15 +27,19 @@ let currentMoves=[];
 
 
 
-//Función para  IA con minmax
-function minmaxIA(){
+//Función para que la IA haga un movimiento aleatorio
+function randomIA(){
     if(!gameActive)return;      //si el juego ha terminado, no se hace nada
 
-    const bestMove = findBestMove(boardStatus);
-    boardStatus[bestMove] = currentPlayer;
-    cells[bestMove].textContent = currentPlayer;
-    currentMoves.push(currentPlayer + bestMove);
+    //con esto se obtiene los índices de las celdas vacías
+    let availableCells = boardStatus.map((cell, index) => (cell === '' ? index : null)).filter(index => index !== null);
 
+    if (availableCells.length === 0) return;        //no hay movimientos posbiles
+
+    let randomIndex = availableCells[Math.floor(Math.random()* availableCells.length)];
+    boardStatus[randomIndex] = currentPlayer;
+    cells[randomIndex].textContent = currentPlayer;
+    currentMoves.push(currentPlayer + randomIndex);
 
     //verificar si ha ganado la IA
     if(checkWin()){
@@ -43,7 +47,7 @@ function minmaxIA(){
         updateHistoryGame(currentPlayer);
         gameActive = false;
         disableCells();
-        setTimeout(resetGame, 3000);
+        setTimeout(resetGame, 5000);
         return;
     }
 
@@ -52,10 +56,10 @@ function minmaxIA(){
     //verificar si hay empate
     if(isTie()){
         statusText.textContent = `¡Empate! El juego se reiniciará...`;
-        updateHistoryGame(null);
+        updateHistoryGame();
         gameActive = false;
         disableCells();
-        setTimeout(resetGame, 3000);
+        setTimeout(resetGame, 5000);
         return;
     }
 
@@ -65,65 +69,6 @@ function minmaxIA(){
     updateShiftTurn();
 
 }
-
-//funcion que encuentra el mejor movimiento usando minmax
-function findBestMove(board){
-    let bestScore = -Infinity;
-    let move;
-
-    board.forEach((cell, index) => {
-        if(cell === ''){
-            board[index] = currentPlayer;
-            const score = minmax(board, 0, false);
-            board[index] = '';
-            if(score > bestScore){
-                bestScore = score;
-                move = index;
-            }
-        }
-    });
-
-    return move;
-}
-
-
-//implementar minmax
-function minmax(board, depth, isMaximize){
-    const winner = checkWin();
-
-    if(winner === 'O') return 10 - depth;
-    if(winner === 'X') return depth -10;
-    if(isTie()) return 0;
-
-    if(isMaximize){
-        let bestScore = -Infinity;
-
-        board.forEach((cell, index) => {
-            if(cell === ''){
-                board[index] = 'O';
-                const score = minmax(board, depth + 1, false);
-                board[index] = '';
-                bestScore = Math.max(score, bestScore);
-            }
-        });
-
-        return bestScore;
-    }else{
-        let bestScore = Infinity;
-
-        board.forEach((cell, index) => {
-            if(cell === ''){
-                board[index] = 'X';
-                const score = minmax(board, depth + 1, true);
-                board[index] = '';
-                bestScore = Math.min(score, bestScore);
-            }
-        });
-        
-        return bestScore;
-    }
-}
-
 
 
 //funcion para actualizar el historial 
@@ -219,7 +164,6 @@ function cellClick(index){
 
     boardStatus[index] = currentPlayer;
     cells[index].textContent = currentPlayer;
-
     //Almacenar movimento
     currentMoves.push(currentPlayer + index);
 
@@ -229,10 +173,17 @@ function cellClick(index){
         updateHistoryGame(currentPlayer);
         gameActive = false;
         disableCells();
-        setTimeout(resetGame, 3000);
+        setTimeout(resetGame, 5000);
         return;
     }
 
+    //Verifica si hay empate
+    // if(boardStatus.every(cell=>cell)){
+    //     statusText.textContent = `¡Es un empate! El juego se reiniciara...`;
+    //     updateHistoryGame(null);
+    //     setTimeout(resetGame, 3000);
+    //     return;
+    // }
 
     //si hay empate
     if(isTie()){
@@ -240,10 +191,12 @@ function cellClick(index){
         updateHistoryGame(null);
         gameActive = false;
         disableCells();
-        setTimeout(resetGame, 3000);
+        setTimeout(resetGame, 5000);
         return;
     }
 
+    //Cambia el jugador
+    // currentPlayer = currentPlayer === 'X'?'O':'X';
 
     //Cambiar turno IA 
     currentPlayer = 'O';
@@ -253,7 +206,7 @@ function cellClick(index){
     updateShiftTurn();
 
     //Llamar a la IA para que realice movimeinto
-    setTimeout(minmaxIA, 400);
+    setTimeout(randomIA, 400);
 }
 
 //funcion empate
@@ -264,13 +217,34 @@ function isTie(){
 
 //Comprueba si hay una combinacion ganadora
 function checkWin(){
-    for(const combo of winningCombos){
-        const [a, b, c] = combo;
-        if(boardStatus[a] && boardStatus[a] === boardStatus[b] && boardStatus[a] === boardStatus[c]){
-            return boardStatus[a];
+    const winningLine = winningCombos.find(combo=>{
+        const [a,b,c]  = combo;
+        return boardStatus[a] && boardStatus[a] === boardStatus[b] && boardStatus[a] === boardStatus[c];
+    });
+
+    if(winningLine){
+        //Resaltar celdas ganadoras
+        //winningLine.forEach(index=> cells[index].classList.add('highlight'));
+        winningLine.forEach(index=>{
+            cells[index].classList.add('winner-cell');
+        });
+
+        //Incrementar la puntuacion
+        if(currentPlayer === 'X'){
+            scoreX++;
+        }else{
+            scoreO++;
         }
+        updateScoreBoard();
+        return true;
     }
-    return null;
+    return false;
+
+    
+    // return winningCombos.some(combo=>{
+    //     const[a,b,c]= combo;
+    //     return boardStatus[a] && boardStatus[a] === boardStatus[b] && boardStatus[a] === boardStatus[c];
+    // });
 }
 
 
