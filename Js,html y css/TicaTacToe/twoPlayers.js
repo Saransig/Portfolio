@@ -12,7 +12,7 @@ let scoreO= 0;
 
 
 //variable para historial y almacenamiento local
-let gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+let gameHistory = JSON.parse(localStorage.getItem('gameHistory2P')) || [];
 
 
 //variable para controlar no hacer clic en las otras celdas una vez ganado
@@ -34,7 +34,7 @@ function updateHistoryGame(winner){
     gameHistory.push(result);
 
     //Actualizar localStorage
-    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    localStorage.setItem('gameHistory2P', JSON.stringify(gameHistory));
 
     //Mostrar historial
     showHistoryGame();
@@ -69,7 +69,7 @@ function resetClearHistoryTimeout(){
 //funcion para reiniciar historial
 function resetHistoryGame(){
     gameHistory =[];
-    localStorage.removeItem('gameHistory');
+    localStorage.removeItem('gameHistory2P');
     scoreX = 0;
     scoreO = 0;
     updateScoreBoard();

@@ -9,12 +9,49 @@ body {
 h1 {
     color: #39FF14; /* Color neón */
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5%;
     text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14; /* Efecto neón brillante */
 }
 
 .container {
-    margin-top: 30px;
+    margin-top: 60px;
+}
+
+.container-home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+button.onePlayer, button.twoPlayers{
+    width: 200px;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: #9447ff;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    margin: 15px 0;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+
+button.onePlayer:hover, button.twoPlayers:hover{
+    background-color: #c36ffb;
+    transform: scale(1.05);
+}
+
+
+.home{
+    font-size: 4rem;
+    margin-bottom: 40px;
+    color: #39FF14;
+    text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14;
+    text-align: center;
 }
 
 #score {
@@ -114,6 +151,38 @@ h1 {
     color: #FFFFFF; /* Texto blanco */
 }
 
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #9447ff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;      /*asegura que el nav se situa en la parte superior del contenido*/
+}
+
+
+nav .home-home{
+    background-color: transparent;
+    color: #FFFFFF;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: auto;
+
+}
+
+.home-home:hover{
+    background-color: #c36ffb;
+    transform: scale(1.05);
+}
+
 button {
     background-color: #FF6347; /* Color de botón */
     color: #FFFFFF; /* Texto blanco */
@@ -146,5 +215,20 @@ button:hover {
 
     #score {
         font-size: 1.2rem; /* Ajustar tamaño de puntuaciones en pantallas pequeñas */
+    }
+
+    button.onePlayer, button.twoPlayers{
+        width: 80%;
+        font-size: 1rem;
+    }
+
+    .home{
+        font-size: 2rem;
+    }
+
+
+    nav .home-home{
+        font-size: 1rem;
+        padding: 8px 12px;
     }
 }
