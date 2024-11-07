@@ -17,8 +17,8 @@ document.getElementById('start').addEventListener('click', () => {
     selectedCategory = category.value;
 
     //seleccionar una palabra aleatoria de la categoria elegida
-    const wordsCategory = word[selectedCategory];
-    selectedWord = wordsCategory[Math.floor(Math.random()* wordsCategory.lenght)];
+    const wordsCategory = words[selectedCategory];
+    selectedWord = wordsCategory[Math.floor(Math.random()* wordsCategory.length)];
 
     //restablecer variables
     guessedLetters = [];
