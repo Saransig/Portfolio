@@ -69,3 +69,4 @@ function updateGameStatus(){
     }
 }
 
+function drawHangman(stage){}
