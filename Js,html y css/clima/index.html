@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Clima</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-item">Clima por Ubicación</a>
+        <a href="Location.html" class="nav-item">Clima por Ciudad</a>
+    </nav>
+    <div class="container">
+        <h1>Aplicación de Clima</h1>
+
+        <div class="weather-info" id="weatherResult">
+            <p id="loading">Obteniendo ubicación y clima...</p>
+            <p id="error">No se pudo obtener el clima</p>
+            <p id="location"></p>
+            <p id="temperature"></p>
+            <p id="description"></p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
