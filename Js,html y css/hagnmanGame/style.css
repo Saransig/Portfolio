@@ -141,3 +141,43 @@ button#start:hover{
         transform: translateX(5px);
     }
 }
+
+
+@media (max-width: 600px){
+    h1 {
+        font-size: 2em;
+    }
+
+    .game-container {
+        width: 95%;
+        margin: 15px;
+    }
+
+    #category-select {
+        width: 50%;
+        padding: 6px;
+        font-size: 1em;
+    }
+
+    .secretWord {
+        font-size: 1.5em;
+        letter-spacing: 5px;
+        margin: 15px 0;
+    }
+
+    .wrongLetters {
+        font-size: 1em;
+    }
+
+    button#start {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+
+    #hangman-canvas {
+        width: 100%;
+        height: auto;
+        max-width: 180px;
+        margin-top: 10px;
+    }
+}
