@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f8ff;
+}
+
+.game-container{
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fefae0;
+    border-radius: 15px;
+    position: relative;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* efecto de entrada animada */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h1{
+    font-size: 2.5rem;
+    color: #2a9d8f;
+    margin-bottom: 0.5em;
+    animation: pulse 1.5 infinite;
+}
+
+
+/* Animacion del titulo */
+@keyframes pulse{
+    0%, 100%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+}
+
+/* estilo del selector de categoria */
+.category{
+    margin-bottom: 1em;
+}
+
+.category label{
+    font-weight: bold;
+    color: #264653;
+    font-size: 1.3rem;
+}
+
+#category-select{
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #2a9d8f;
+    background-color: #e9c46a;
+    color:#264653;
+    font-weight: bold;
+}
+
+
+/* estilo boton para empezar juego */
+button#start{
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #e76f51;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+button#start:hover{
+    background-color: #f4a261;
+    transform: scale(1.05);
+}
+
+/* estilo palabra secreta */
+.secretWord{
+    font-size: 2.2rem;
+    color: #2a9d8f;
+    font-weight: bold;
+    letter-spacing: 10px;
+    margin: 20px 0;
+    transition: color 0.3s ease;
+}
+
+.wrongLetters p{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/*estilo letras incorrectas*/
+#wrong-letters{
+    color:#264653;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+/* estilo para el ahorcado */
+#hangman-canvas{
+    border: 2px solid #264653;
+    margin-top: 15px;
+    background-color: #f4f4f9;
+    border-radius: 5px;
+}
+
+.keyboard{
+    animation: shake 0.5s;
+    color: #e63946;
+}
+
+@keyframes shake{
+    0%, 100%{
+        transform: translateX(0);
+    }
+
+    25%{
+        transform: translateX(-5);
+    }
+
+    75%{
+        transform: translateX(5px);
+    }
+}

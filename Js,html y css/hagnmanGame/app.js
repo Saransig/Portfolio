@@ -27,7 +27,7 @@ document.getElementById('start').addEventListener('click', () => {
 
     displayWord();
     document.getElementById("wrong-letters").textContent = '';
-    drawHangman(0);
+    drawStructure();
 });
 
 
@@ -62,6 +62,8 @@ function updateGameStatus(){
     displayWord();
     document.getElementById("wrong-letters").textContent = wrongLetters.join(', ');
 
+    drawHangman(6-lives);
+
     if(lives === 0){
         alert("Has perdido! La palabra era " + selectedWord);
     }else if(selectedWord.split('').every(letter => guessedLetters.includes(letter))){
@@ -70,57 +72,61 @@ function updateGameStatus(){
 }
 
 
+//funcion para dibujar la esctructura
+function drawStructure(){
+    const canvas = document.getElementById("hangman-canvas");
+    const contextoDibujo = canvas.getContext("2d");
+    contextoDibujo.clearRect(0, 0, canvas.width, canvas.height);
+    contextoDibujo.lineWidth = 2;
+
+    //etapa dinujo de la base
+    contextoDibujo.beginPath(); 
+    contextoDibujo.moveTo(10,190); 
+    contextoDibujo.lineTo(190, 190); 
+    contextoDibujo.stroke();
+    
+
+
+    //etapa dibujo del poste
+    contextoDibujo.beginPath(); 
+    contextoDibujo.moveTo(50,190); 
+    contextoDibujo.lineTo(50, 20); 
+    contextoDibujo.stroke();
+    
+
+    //etapa poste superior
+    contextoDibujo.beginPath(); 
+    contextoDibujo.moveTo(50,20); 
+    contextoDibujo.lineTo(150, 20); 
+    contextoDibujo.stroke();
+
+
+    //etapa dibujo cuerda
+    contextoDibujo.beginPath(); 
+    contextoDibujo.moveTo(150,20); 
+    contextoDibujo.lineTo(150, 50); 
+    contextoDibujo.stroke();
+    
+}
+
+
 //funcion para dibujar el ahorcado
 function drawHangman(stage){
     const canvas = document.getElementById("hangman-canvas");
     const contextoDibujo = canvas.getContext("2d");
-    contextoDibujo.clearRect(0, 0, canvas.clientWidth, canvas.height);
-    contextoDibujo.lineWidth = 2;
+    
 
     //ahorcado dibujado de forma basica por etapas
-    //etapa de la base
-    if(stage >0){
-        contextoDibujo.beginPath(); 
-        contextoDibujo.moveTo(10,190); 
-        contextoDibujo.lineTo(190, 190); 
-        contextoDibujo.stroke();
-    }
-
-
-    //etapa del poste
-    if(stage > 1 ){
-        contextoDibujo.beginPath(); 
-        contextoDibujo.moveTo(50,190); 
-        contextoDibujo.lineTo(50, 20); 
-        contextoDibujo.stroke();
-    }
-
-    //etapa poste superior
-    if(stage > 2){
-        contextoDibujo.beginPath(); 
-        contextoDibujo.moveTo(50,20); 
-        contextoDibujo.lineTo(150, 20); 
-        contextoDibujo.stroke();
-    }
-
-    //etapa cuerda
-    if(stage > 3){
-        contextoDibujo.beginPath(); 
-        contextoDibujo.moveTo(150,20); 
-        contextoDibujo.lineTo(150, 50); 
-        contextoDibujo.stroke();
-    }
-
-
-    //etapa cabeza
-    if(stage > 4){
+    
+    //etapa dibujo de la cabeza
+    if(stage === 1){
         contextoDibujo.beginPath();
         contextoDibujo.arc(150, 70, 20, 0, Math.PI * 2); 
         contextoDibujo.stroke();
     }
 
     //etapa cuerpo
-    if(stage > 5){
+    if(stage === 2){
         contextoDibujo.beginPath(); 
         contextoDibujo.moveTo(150,90); 
         contextoDibujo.lineTo(150, 140); 
@@ -128,7 +134,7 @@ function drawHangman(stage){
     }
 
     //etapa brazo izquierdo
-    if(stage > 6){
+    if(stage === 3){
         contextoDibujo.beginPath(); 
         contextoDibujo.moveTo(150,100); 
         contextoDibujo.lineTo(130, 120); 
@@ -136,7 +142,7 @@ function drawHangman(stage){
     }
 
     //etapa brazo derecho
-    if(stage > 7){
+    if(stage === 4){
         contextoDibujo.beginPath(); 
         contextoDibujo.moveTo(150,100); 
         contextoDibujo.lineTo(170, 120); 
@@ -144,7 +150,7 @@ function drawHangman(stage){
     }
 
     //etapa pierna izquierda
-    if(stage > 8){
+    if(stage === 5){
         contextoDibujo.beginPath(); 
         contextoDibujo.moveTo(150,140); 
         contextoDibujo.lineTo(130, 170); 
@@ -152,7 +158,7 @@ function drawHangman(stage){
     }
 
     //etapa pierna derecha
-    if(stage > 9){
+    if(stage === 6){
         contextoDibujo.beginPath(); 
         contextoDibujo.moveTo(150,140); 
         contextoDibujo.lineTo(170, 170); 
