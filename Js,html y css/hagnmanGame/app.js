@@ -26,7 +26,7 @@ document.getElementById('start').addEventListener('click', () => {
     lives = 6;
 
     displayWord();
-    document.getElementById("wrongLetters").textContent = '';
+    document.getElementById("wrong-letters").textContent = '';
     drawHangman(0);
 });
 
@@ -40,8 +40,8 @@ function displayWord(){
 }
 
 
-//detectar teclado
-document.addEventListener('keyboard-detect', (event) => {
+//detectar teclado usando keydown
+document.addEventListener('keydown', (event) => {
     const letter = event.key.toLowerCase();
 
     //validar si la letra coincide y no se ha validado antes
@@ -60,13 +60,102 @@ document.addEventListener('keyboard-detect', (event) => {
 //funcion actualizar estado del juego
 function updateGameStatus(){
     displayWord();
-    document.getElementById("wrongLetters").textContent = wrongLetters.join(', ');
+    document.getElementById("wrong-letters").textContent = wrongLetters.join(', ');
 
     if(lives === 0){
         alert("Has perdido! La palabra era " + selectedWord);
     }else if(selectedWord.split('').every(letter => guessedLetters.includes(letter))){
-        alert("¡Enhorabuena! Has ganado.");
+        setTimeout(() => alert("¡Enhorabuena! Has ganado."), 200);
     }
 }
 
-function drawHangman(stage){}
+
+//funcion para dibujar el ahorcado
+function drawHangman(stage){
+    const canvas = document.getElementById("hangman-canvas");
+    const contextoDibujo = canvas.getContext("2d");
+    contextoDibujo.clearRect(0, 0, canvas.clientWidth, canvas.height);
+    contextoDibujo.lineWidth = 2;
+
+    //ahorcado dibujado de forma basica por etapas
+    //etapa de la base
+    if(stage >0){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(10,190); 
+        contextoDibujo.lineTo(190, 190); 
+        contextoDibujo.stroke();
+    }
+
+
+    //etapa del poste
+    if(stage > 1 ){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(50,190); 
+        contextoDibujo.lineTo(50, 20); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa poste superior
+    if(stage > 2){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(50,20); 
+        contextoDibujo.lineTo(150, 20); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa cuerda
+    if(stage > 3){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(150,20); 
+        contextoDibujo.lineTo(150, 50); 
+        contextoDibujo.stroke();
+    }
+
+
+    //etapa cabeza
+    if(stage > 4){
+        contextoDibujo.beginPath();
+        contextoDibujo.arc(150, 70, 20, 0, Math.PI * 2); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa cuerpo
+    if(stage > 5){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(150,90); 
+        contextoDibujo.lineTo(150, 140); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa brazo izquierdo
+    if(stage > 6){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(150,100); 
+        contextoDibujo.lineTo(130, 120); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa brazo derecho
+    if(stage > 7){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(150,100); 
+        contextoDibujo.lineTo(170, 120); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa pierna izquierda
+    if(stage > 8){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(150,140); 
+        contextoDibujo.lineTo(130, 170); 
+        contextoDibujo.stroke();
+    }
+
+    //etapa pierna derecha
+    if(stage > 9){
+        contextoDibujo.beginPath(); 
+        contextoDibujo.moveTo(150,140); 
+        contextoDibujo.lineTo(170, 170); 
+        contextoDibujo.stroke();
+    }
+}
