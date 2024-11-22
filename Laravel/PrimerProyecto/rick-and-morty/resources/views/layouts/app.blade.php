@@ -23,6 +23,10 @@
         @yield('content')
     </div>
 
+    <footer>
+        <p>&copy; Sandra Saransig 2024</p>
+    </footer>
+
     @yield('scripts')
 </body>
 </html>

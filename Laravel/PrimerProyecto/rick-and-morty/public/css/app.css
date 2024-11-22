@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Personalización del fondo y el texto */
+
 body {
     font-family: 'Figtree', sans-serif;
     background-color: #111111;
+
 }
 
 /* Estilo para el encabezado */
@@ -30,39 +31,58 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 0;
+    z-index: 50;
+    width: 100%;
     background: linear-gradient(to right, #34D399, #00B5E2);
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Aseguramos que el texto del logo tenga un tamaño adecuado */
-nav a.text-3xl {
-    font-size: 3rem;
+/* Estilo for the "Rick & Morty"  */
+nav a.text-3x1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 50px;
+    flex: 1;
 }
 
-/* Estilos para el ul (menú de navegación) */
+nav a.text-3x1:hover {
+    color: #FFDD00;
+}
+
+/* Estilo lista menu */
 nav ul {
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
     padding: 0;
     margin: 0;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Alineación horizontal en pantallas grandes */
+/* Estilo links menu */
 nav ul li {
-    display: inline-block;
-    padding: 10px;
+    text-align: center;
+    padding: 5px auto;
 }
 
-/* Enlaces dentro del navbar */
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    padding: 5px;
-    transition: color 0.3s;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Estilo para los enlaces al pasar el ratón */
 nav ul li a:hover {
     color: #FFDD00;
 }
@@ -78,8 +98,22 @@ p{
     color: white;
 }
 
+
 .pt-20{
     padding-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 70px);
+    text-align: center;
+
+}
+
+.pt-20 .text-4xl{
+    align-items: center;
+    justify-content: center;
+
 }
 
 /* Personalización de los botones */
@@ -96,12 +130,23 @@ button:hover, .page-link:hover {
 }
 
 /* Estilos para las tarjetas */
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
 .character-card {
     background-color: #222222;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 250px;
+    margin: 0 auto;
 }
 
 .character-card:hover {
@@ -114,6 +159,10 @@ button:hover, .page-link:hover {
     max-width: 200px;
     border-radius: 10px;
     margin-bottom: 10px;
+}
+
+span{
+    color: #fff;
 }
 
 /* Estilo para la paginación */
@@ -161,6 +210,29 @@ button:hover, .page-link:hover {
     justify-content: center;
     margin-top: 20px;
 }
+
+footer{
+    background: #555555;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+footer p{
+    text-align: center;
+    color: #fff;
+    margin: 0;
+
+
+}
+
+
+
+
 
 /* Adaptación para pantallas pequeñas */
 @media (max-width: 768px) {
