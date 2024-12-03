@@ -8,38 +8,48 @@ use GuzzleHttp\Client;
 class CharacterController extends Controller
 {
     public function index(Request $request){
-
         $client = new Client();
 
         try {
+            // Determina la página actual a cargar
+            $currentPage = $request->get('page', 1);
+            $quantity = 9;
+
+            // Llama a la API con la página actual
             $response = $client->get('https://rickandmortyapi.com/api/character', [
-                'query' => $request->only('name', 'status', 'species', 'page')
+                'query' => ['page' => $currentPage],
             ]);
 
             $data = json_decode($response->getBody(), true);
 
-            $characters = $data['results'] ?? [];
-            $info = $data['info'] ?? ['pages' => 1, 'prev' => null, 'next' => null];
-            $info['current'] = $request->get('page', 1); // Página actual
+            // Extrae los personajes y la información de paginación
+            $characters = array_slice($data['results'] ?? [], 0, $quantity);
+            $info = $data['info'] ?? ['next' => null];
 
+            // Si es una solicitud AJAX, devuelve JSON
             if ($request->ajax()) {
                 return response()->json([
                     'characters' => $characters,
-                    'info' => $info,
+                    'next' => $info['next'] ? $currentPage + 1 : null,
                 ]);
             }
 
-            return view('characters.index', compact('characters', 'info'));
+            // Si no es AJAX, devuelve la vista
+            return view('characters.index', compact('characters'));
         } catch (\Exception $e) {
+            // En caso de error, maneja la excepción
             $characters = [];
-            $info = ['pages' => 1, 'prev' => null, 'next' => null, 'current' => 1];
+            $error = 'Error al obtener los personajes: ' . $e->getMessage();
+
+            // Si es AJAX, devuelve el error en formato JSON
             if ($request->ajax()) {
-                return response()->json(['error' => 'Error al obtener datos: ' . $e->getMessage()], 500);
+                return response()->json(['error' => $error], 500);
             }
-            return view('characters.index', compact('characters', 'info'));
+
+            // Solicitudes normales, carga la vista con el error
+            return view('characters.index', compact('characters'))->withErrors($error);
         }
     }
-
 
 
 
